@@ -3,6 +3,13 @@
 const ApiGateway = require("moleculer-web");
 const cors = require("cors");
 
+const corsOptions = {
+    origin: '*', // замените на ваш источник
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Если необходимо передавать куки, тогда использовать true
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+
 /**
  * @typedef {import('moleculer').ServiceSchema} ServiceSchema Moleculer's Service Schema
  * @typedef {import('moleculer').Context} Context Moleculer's Context
@@ -35,7 +42,7 @@ module.exports = {
 				],
 
 				// Route-level Express middlewares. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Middlewares
-				use: [],
+				use: [cors(corsOptions)],
 
 				// Enable/disable parameter merging method. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Disable-merging
 				mergeParams: true,
