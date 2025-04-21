@@ -1,0 +1,29 @@
+name: Back2
+run-name: ${{ github.actor }} is changed project 
+on: [push]
+jobs:
+  Update-repo:
+    runs-on: ubuntu-22.04
+    environment: test
+    steps: 
+      - run: echo "Start update repo..."
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      
+      - name: Deploy to server
+        run: |
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.SSH_SERVER_IP }} << 'EOF'
+            export PATH=$PATH:/root/.nvm/versions/node/v20.19.0/bin  # Обновляем PATH
+            echo $PATH
+            cd /
+            cd back2/
+            cd back2/
+            pwd
+            git pull
+            npm start
+            
+            
