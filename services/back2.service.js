@@ -10,7 +10,7 @@ module.exports = {
             async handler(ctx) {
                 ctx.broker.emit("back1.event")
                 console.log("acBack2 handler result");
-                return "acBack2 handler result"
+                return "acBack2 handler result updated"
             }
         },
         ac2Back2: {
